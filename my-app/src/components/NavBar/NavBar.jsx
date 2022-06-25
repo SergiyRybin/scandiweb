@@ -15,6 +15,18 @@ export const NavBar = () => {
         <nav>
           <List data={data} />
         </nav>
+        <div className={style.Items}>
+          <form>
+            <label>
+              <select name="" id="">
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="JPY">JPY</option>
+              </select>
+            </label>
+          </form>
+          <div><button>корзина</button></div>
+        </div>
       </header>
     </>
   );

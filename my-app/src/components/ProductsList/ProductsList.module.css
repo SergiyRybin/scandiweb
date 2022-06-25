@@ -1,5 +1,18 @@
-.ProductsList{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 32px;
+.ProductsList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.ProductsList li {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
+.ProductsList img {
+  width: 354px;
+  /* height: 330px; */
 }

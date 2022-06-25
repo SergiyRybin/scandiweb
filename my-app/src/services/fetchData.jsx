@@ -54,6 +54,13 @@ export const fetchProducts = gql`
         gallery
         description
         category
+        prices {
+          currency {
+            label
+            symbol
+          }
+          amount
+        }
       }
     }
   }
