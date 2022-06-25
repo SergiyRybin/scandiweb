@@ -34,3 +34,27 @@ export const fetchAllData = gql`
     }
   }
 `;
+
+export const fetchCategories = gql`
+  query data {
+    categories {
+      name
+    }
+  }
+`;
+
+export const fetchProducts = gql`
+  query data {
+    categories {
+      products {
+        id
+        name
+        inStock
+        category
+        gallery
+        description
+        category
+      }
+    }
+  }
+`;

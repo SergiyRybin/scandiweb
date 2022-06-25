@@ -1,9 +1,10 @@
 import { useQuery } from "@apollo/client";
-import style from '../NavBar/NavBar.module.css'
-import { fetchAllData } from "../../services/fetchData";
+import style from "../NavBar/NavBar.module.css";
+import { fetchCategories } from "../../services/fetchData";
+import { List } from "../List/List";
 
 export const NavBar = () => {
-  const { data, loading, error } = useQuery(fetchAllData);
+  const { data, loading, error } = useQuery(fetchCategories);
 
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
@@ -12,13 +13,7 @@ export const NavBar = () => {
     <>
       <header className={style.NavBar}>
         <nav>
-          <ul>
-            {data.categories.map((el, index) => (
-              <li key={index}>
-                <a href="">{el.name}</a>
-              </li>
-            ))}
-          </ul>
+          <List data={data} />
         </nav>
       </header>
     </>
