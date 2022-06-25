@@ -1,8 +1,9 @@
 import { useQuery } from "@apollo/client";
 import { fetchProducts } from "../../services/fetchData";
+import { Modal } from "../Modal";
 import style from "../ProductsList/ProductsList.module.css";
 
-export const ProductsList = () => {
+export const ProductsList = ({ modal }) => {
   const { data, loading, error } = useQuery(fetchProducts);
 
   if (loading) return "Loading...";
@@ -13,7 +14,13 @@ export const ProductsList = () => {
     <>
       <ul className={style.ProductsList}>
         {allCategory.products.map((el, index) => (
-          <li key={index}>
+          // console.log(el)
+          <li
+            key={index}
+            onClick={() => {
+              modal();
+            }}
+          >
             <img src={el.gallery[0]} alt={el.name} />
             <p>{el.name}</p>
             <p>{el.prices.map((d) => d.amount)}</p>

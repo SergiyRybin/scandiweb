@@ -1,4 +1,4 @@
-import { ListNavigatin } from "../ListCard/ListNavigation";
+import { ListNavigatin } from "../ListNavigation/ListNavigation";
 
 export const List = ({ data }) => {
   return (
