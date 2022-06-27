@@ -1,6 +1,5 @@
 import { useQuery } from "@apollo/client";
 import { fetchProducts } from "../../services/fetchData";
-import { Modal } from "../Modal";
 import style from "../ProductsList/ProductsList.module.css";
 
 export const ProductsList = ({ modal }) => {
@@ -14,11 +13,10 @@ export const ProductsList = ({ modal }) => {
     <>
       <ul className={style.ProductsList}>
         {allCategory.products.map((el, index) => (
-          // console.log(el)
           <li
             key={index}
             onClick={() => {
-              modal();
+              modal(el.id, el.gallery[0]);
             }}
           >
             <img src={el.gallery[0]} alt={el.name} />

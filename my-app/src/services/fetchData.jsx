@@ -44,16 +44,7 @@ export const fetchCategories = gql`
   }
 `;
 
-// export function useFetchPr () {
-//   const { data, loading, error } = useQuery(fetchProducts);
 
-//   if (loading) return "Loading...";
-//   if (error) return `Error! ${error.message}`;
-//   console.log(data)
-
-//   // const allCategory = data.categories[0];
-//   // return allCategory;
-// };
 
 export const fetchProducts = gql`
   query data {
@@ -79,15 +70,33 @@ export const fetchProducts = gql`
 `;
 
 
-// export const useProductsList = () => {
-  
-//   const { data, loading, error } = useQuery(fetchProducts);
-
-//   if (loading) return "Loading...";
-//   if (error) return `Error! ${error.message}`;
-//   if(data) return data
-//   // console.log(data)
-// };
-
-// const Udat =()=>{
-//  const da = useProductsList()}
+export const fetchProductDetails = gql`
+query product($id: String!){
+  product(id: $id){
+    id
+    name
+    inStock
+    gallery
+    description
+    category
+    attributes{
+      id
+      name
+      type
+      items{
+        displayValue
+        value
+        id
+      }
+    }
+    prices{
+      currency{
+        label
+        symbol
+      }
+      amount
+    }
+    brand
+  }
+}
+`
