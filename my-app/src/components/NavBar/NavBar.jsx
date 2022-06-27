@@ -3,7 +3,7 @@ import style from "../NavBar/NavBar.module.css";
 import { fetchCategories } from "../../services/fetchData";
 import { List } from "../List/List";
 
-export const NavBar = () => {
+export const NavBar = ({nameSelect}) => {
   const { data, loading, error } = useQuery(fetchCategories);
 
   if (loading) return "Loading...";
@@ -16,9 +16,9 @@ export const NavBar = () => {
           <List data={data} />
         </nav>
         <div className={style.Items}>
-          <form>
+          <form >
             <label>
-              <select name="" id="">
+              <select name="" id="" onChange={nameSelect}>
                 <option value="USD">USD</option>
                 <option value="EUR">EUR</option>
                 <option value="JPY">JPY</option>

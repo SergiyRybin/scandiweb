@@ -2,13 +2,13 @@ import { useQuery } from "@apollo/client";
 import { fetchProducts } from "../../services/fetchData";
 import style from "../ProductsList/ProductsList.module.css";
 
-export const ProductsList = ({ modal }) => {
+export const ProductsList = ({ modal, value }) => {
   const { data, loading, error } = useQuery(fetchProducts);
 
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
   const allCategory = data.categories[0];
-
+console.log(data)
   return (
     <>
       <ul className={style.ProductsList}>
@@ -21,7 +21,9 @@ export const ProductsList = ({ modal }) => {
           >
             <img src={el.gallery[0]} alt={el.name} />
             <p>{el.name}</p>
-            <p>{el.prices[0].currency.symbol}{ el.prices[0].amount}</p>
+            <p>
+            {/* { el.prices[0].amount} */}
+            </p>
           </li>
         ))}
       </ul>
