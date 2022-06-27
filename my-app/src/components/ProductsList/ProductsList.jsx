@@ -21,7 +21,7 @@ export const ProductsList = ({ modal }) => {
           >
             <img src={el.gallery[0]} alt={el.name} />
             <p>{el.name}</p>
-            <p>{el.prices.map((d) => d.amount)}</p>
+            <p>{el.prices[0].currency.symbol}{ el.prices[0].amount}</p>
           </li>
         ))}
       </ul>

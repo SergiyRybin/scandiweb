@@ -2,7 +2,6 @@ import { createPortal } from "react-dom";
 import { fetchProductDetails } from "../../services/fetchData";
 import style from "../ModalDetails/ModalDetails.module.css";
 import { useQuery } from "@apollo/client";
-import { Container } from "../Container/Container";
 import { useState } from "react";
 
 const modalRoot = document.querySelector("#modalDetails");
@@ -42,14 +41,22 @@ export const ModalDetails = ({ dataId, dataImg }) => {
         <div>
           <h2>{data.product.name}</h2>
           <p>{data.product.brand}</p>
-          {data.product.attributes.map((el) => (
-            <>
+          {data.product.attributes.map((el, index) => (
+            <div key={index}>
               <p key={el.id}>{el.id}:</p>
-              {el.items.map((el) => (
-                <button>{el.value}</button>
+              {el.items.map((el, index) => (
+                <button key={index}>{el.displayValue}</button>
               ))}
-            </>
+            </div>
           ))}
+          <p>
+            {data.product.prices[0].currency.symbol}
+            {data.product.prices[0].amount}
+          </p>
+          <button>add to cart</button>
+          <div
+            dangerouslySetInnerHTML={{ __html: data.product.description }}
+          ></div>
         </div>
       </div>
     </div>,
