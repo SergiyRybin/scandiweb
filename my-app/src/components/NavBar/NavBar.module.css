@@ -1,43 +1,21 @@
 .NavBar {
   margin: 0;
-  background-color: aqua;
+  background-color: whitesmoke;
   height: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.NavBar ul {
+.Item{
   display: flex;
-  justify-content: flex-start;
-}
-.NavBar li {
-  margin-right: 32px;
-  font-weight: 600;
-  text-transform: uppercase;
-
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-}
-.NavBar li:last-child {
-  margin-right: 0px;
-}
-.NavBar a {
-  color: #1d1f22;
+  align-items: center;
 }
 
-select {
-  outline: none;
-  border: none;
-  /* width: 38px; */
-  /* height: 29px; */
-  /* background-color: green; */
-}
-select option {
-  width: 50px;
-  height: 50px;
-  background-color: green;
+.Item button{
+  height: 20px;
 }
 
-.Items{
-  display: flex;
+.NavBar a{
+  color: black;
 }

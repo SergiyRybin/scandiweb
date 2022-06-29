@@ -2,8 +2,9 @@ import { useQuery } from "@apollo/client";
 import style from "../NavBar/NavBar.module.css";
 import { fetchCategories } from "../../services/fetchData";
 import { List } from "../List/List";
+import { Currensy } from "../Currensy/Currensy";
 
-export const NavBar = ({nameSelect}) => {
+export const NavBar = () => {
   const { data, loading, error } = useQuery(fetchCategories);
 
   if (loading) return "Loading...";
@@ -15,17 +16,9 @@ export const NavBar = ({nameSelect}) => {
         <nav>
           <List data={data} />
         </nav>
-        <div className={style.Items}>
-          <form >
-            <label>
-              <select name="" id="" onChange={nameSelect}>
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="JPY">JPY</option>
-              </select>
-            </label>
-          </form>
-          <div><button>корзина</button></div>
+        <div className={style.Item}>
+          <Currensy />
+          <button>корзина</button>
         </div>
       </header>
     </>

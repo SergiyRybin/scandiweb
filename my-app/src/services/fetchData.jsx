@@ -44,8 +44,6 @@ export const fetchCategories = gql`
   }
 `;
 
-
-
 export const fetchProducts = gql`
   query data {
     categories {
@@ -69,34 +67,42 @@ export const fetchProducts = gql`
   }
 `;
 
-
 export const fetchProductDetails = gql`
-query product($id: String!){
-  product(id: $id){
-    id
-    name
-    inStock
-    gallery
-    description
-    category
-    attributes{
+  query product($id: String!) {
+    product(id: $id) {
       id
       name
-      type
-      items{
-        displayValue
-        value
+      inStock
+      gallery
+      description
+      category
+      attributes {
         id
+        name
+        type
+        items {
+          displayValue
+          value
+          id
+        }
       }
-    }
-    prices{
-      currency{
-        label
-        symbol
+      prices {
+        currency {
+          label
+          symbol
+        }
+        amount
       }
-      amount
+      brand
     }
-    brand
   }
-}
-`
+`;
+
+export const fetchCurrencies = gql`
+  query data {
+    currencies {
+      label
+      symbol
+    }
+  }
+`;

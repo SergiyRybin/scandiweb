@@ -1,18 +1,60 @@
 .ProductsList {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-items: center;
   justify-content: space-between;
-  gap: 32px;
+  column-gap: 40px;
+  row-gap: 103px;
 }
 
 .ProductsList li {
-  border: 1px solid black;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  align-items: center;
+  position: relative;
+
+  /* filter: drop-shadow(0px 4px 35px rgba(168, 172, 176, 0.19)); */
+  background: #ffffff;
+  max-width: 386px;
+  max-height: 444px;
+  padding: 16px;
+  flex-grow: 0;
+  box-sizing: border-box;
 }
 
 .ProductsList img {
-  width: 354px;
-  /* height: 330px; */
+  height: 330px;
+  width: 100%;
+  border-radius: 0px;
+  object-fit: contain;
+  outline: 1px solid #5ece7b;
+  margin: 0;
+}
+
+.AddProduct {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  right: 20px;
+  bottom: 56px;
+  filter: drop-shadow(0px 4px 11px rgba(29, 31, 34, 0.1));
+  border-radius: 50%;
+  border: none;
+  background: #5ece7b;
+}
+.ProductsList li:hover {
+  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+}
+
+.Name {
+  width: 100%;
+  margin-top: 24px;
+  margin-bottom: 0;
+}
+.Name p {
+  margin-bottom: 10px;
+  margin-top: 0;
+}
+.Name p:last-child {
+  margin-bottom: 0;
 }
