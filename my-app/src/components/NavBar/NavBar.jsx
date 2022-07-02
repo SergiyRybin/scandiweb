@@ -18,7 +18,9 @@ export const NavBar = () => {
         </nav>
         <div className={style.Item}>
           <Currensy />
-          <button>корзина</button>
+          <button>
+           
+          </button>
         </div>
       </header>
     </>

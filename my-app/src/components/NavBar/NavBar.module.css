@@ -1,6 +1,6 @@
 .NavBar {
   margin: 0;
-  background-color: whitesmoke;
+  
   height: 80px;
   display: flex;
   align-items: center;
@@ -13,7 +13,11 @@
 }
 
 .Item button{
+  background-image: url(../../image/2849824-basket-buy-market-multimedia-shop-shopping-store_107977.svg);
   height: 20px;
+  width: 20px;
+  border: none;
+  background-color: transparent;
 }
 
 .NavBar a{

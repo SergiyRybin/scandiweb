@@ -5,6 +5,7 @@ import { useState } from "react";
 
 export const Currensy = () => {
   const [isActive, setActive] = useState(false);
+  const [symbol, setSymbol] = useState("$");
   const { data, loading, error } = useQuery(fetchCurrencies);
 
   if (loading) return "Loading...";
@@ -14,21 +15,30 @@ export const Currensy = () => {
   const toggleClass = () => {
     setActive(!isActive);
   };
-
-  const currenciesValue = (e)=>{
-    console.log(e.target.textContent)
+ 
+  const currenciesValue = (el, e) => {
+    console.log(e.target);
     setActive(!isActive);
-  }
-
+    setSymbol(el.symbol);
+  };
   return (
     <>
       <div className={style.SelectValue} onClick={toggleClass}>
-        <p>валюта</p>
+        <p>{symbol}</p>
+        <span>^</span>
       </div>
 
       <ul className={isActive ? "listCurrency hide" : "listCurrency"}>
         {currencies.map((el, index) => (
-          <li className={style.List} key={index} onClick={currenciesValue}>{el.label} </li>
+          <li
+            className={style.List}
+            key={index}
+            onClick={(e) => {
+              currenciesValue(el, e);
+            }}
+          >
+            {el.symbol} {el.label}{" "}
+          </li>
         ))}
       </ul>
     </>
