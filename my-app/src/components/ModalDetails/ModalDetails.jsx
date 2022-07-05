@@ -15,8 +15,9 @@ export const ModalDetails = ({ dataId, dataImg }) => {
   });
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
-  console.log(data);
 
+
+  
   return createPortal(
     // <div className={style.Overlay}>
     <Container>

@@ -1,4 +1,6 @@
 import { useQuery } from "@apollo/client";
+import { useRef } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addCurrensy, currencyValue } from "../../redux/reduser";
@@ -8,9 +10,25 @@ import style from "../Currensy/Currensy.module.css";
 export const Currensy = () => {
   const [isActive, setActive] = useState(false);
   const { data, loading, error } = useQuery(fetchCurrencies);
-  
+  const but = useRef();
+
   const symbol = useSelector(currencyValue);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    document.addEventListener("click", (e) => {
+      if (but.current.contains(e.target)) {
+        return;
+      }
+      setActive(false);
+    });
+
+    return () => {
+      document.removeEventListener("click", (e) => {
+        console.log(e.target);
+      });
+    };
+  }, [isActive]);
 
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
@@ -21,14 +39,14 @@ export const Currensy = () => {
   };
 
   const currenciesValue = (el, e) => {
-    setActive(!isActive);
+    setActive(isActive);
     dispatch(addCurrensy({ currencies: el }));
   };
 
   return (
     <>
-      <div className={style.SelectValue} onClick={toggleClass}>
-        <p>{symbol.symbol}</p>
+      <div className={style.SelectValue} onClick={toggleClass} ref={but}>
+        {symbol.symbol}
         <span>^</span>
       </div>
 

@@ -1,14 +1,13 @@
 import style from "../ListNavigation/ListNavigation.module.css";
+import { useDispatch } from "react-redux";
+import { addCurentCategory } from "../../redux/reduser";
 
-export const ListNavigatin = ({ data }) => {
-  const dataFromLink = (e) => {
-    console.log(e.target.textContent);
-  };
+export const ListNavigatin = ({ data, nameCat }) => {
+  const dispatch = useDispatch();
 
   return (
     <li className={style.ListNavigatin}>
-      <p onClick={(e)=>dataFromLink(e)}>{data.name}</p>
-      {/* <a href='/' onClick={(e)=>dataFromLink(e)}>{data.name}</a> */}
+      <p onClick={(e) =>dispatch(addCurentCategory(e.target.textContent)) }>{data.name}</p>
     </li>
   );
 };

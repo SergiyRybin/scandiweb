@@ -47,6 +47,7 @@ export const fetchCategories = gql`
 export const fetchProducts = gql`
   query data {
     categories {
+      name
       products {
         id
         name
@@ -106,3 +107,5 @@ export const fetchCurrencies = gql`
     }
   }
 `;
+
+
