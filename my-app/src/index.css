@@ -33,8 +33,8 @@ img {
 
 .listCurrency {
   position: absolute;
-  top: 20px;
-  /* right: 170px; */
+  top: 10px;
+  right: -15px;
   visibility: hidden;
   transition: all 250ms ease-in-out;
   opacity: 0;

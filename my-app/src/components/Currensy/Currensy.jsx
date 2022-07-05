@@ -15,9 +15,8 @@ export const Currensy = () => {
   const toggleClass = () => {
     setActive(!isActive);
   };
- 
+
   const currenciesValue = (el, e) => {
-    console.log(e.target);
     setActive(!isActive);
     setSymbol(el.symbol);
   };
@@ -37,7 +36,8 @@ export const Currensy = () => {
               currenciesValue(el, e);
             }}
           >
-            {el.symbol} {el.label}{" "}
+            {el.symbol}
+            {el.label}
           </li>
         ))}
       </ul>
