@@ -3,21 +3,25 @@ import { createSlice } from "@reduxjs/toolkit";
 export const mySlice = createSlice({
   name: "myValue",
   initialState: {
-    currensy: '',
-    store: {}
-
+    currensy: {
+      currencies: { __typename: "Currency", label: "USD", symbol: "$" },
+    },
+    store: {},
   },
   reducers: {
-    addContact(state, action) {
-        console.log(action.payload);
-    //   state.contacts.items.push(action.payload);
+    addCurrensy(state, action) {
+      state.currensy = action.payload;
     },
-    removeContact(state, action) {
-        console.log(action.payload);
+    addToStore(state, action) {
+      console.log(action.payload);
     },
   },
 });
 
-export const { addContact } = mySlice.actions;
+export const { addCurrensy } = mySlice.actions;
 
-export const { removeContact } = mySlice.actions;
+export const { addToStore } = mySlice.actions;
+
+export const currencyValue = state => state.myValue.currensy.currencies
+
+export const addProductState = state => state.myValue.store

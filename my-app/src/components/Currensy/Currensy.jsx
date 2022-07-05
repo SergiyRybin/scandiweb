@@ -1,12 +1,16 @@
-import style from "../Currensy/Currensy.module.css";
-import { fetchCurrencies } from "../../services/fetchData";
 import { useQuery } from "@apollo/client";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addCurrensy, currencyValue } from "../../redux/reduser";
+import { fetchCurrencies } from "../../services/fetchData";
+import style from "../Currensy/Currensy.module.css";
 
 export const Currensy = () => {
   const [isActive, setActive] = useState(false);
-  const [symbol, setSymbol] = useState("$");
   const { data, loading, error } = useQuery(fetchCurrencies);
+  
+  const symbol = useSelector(currencyValue);
+  const dispatch = useDispatch();
 
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
@@ -18,12 +22,13 @@ export const Currensy = () => {
 
   const currenciesValue = (el, e) => {
     setActive(!isActive);
-    setSymbol(el.symbol);
+    dispatch(addCurrensy({ currencies: el }));
   };
+
   return (
     <>
       <div className={style.SelectValue} onClick={toggleClass}>
-        <p>{symbol}</p>
+        <p>{symbol.symbol}</p>
         <span>^</span>
       </div>
 
