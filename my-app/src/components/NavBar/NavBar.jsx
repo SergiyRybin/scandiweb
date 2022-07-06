@@ -4,7 +4,7 @@ import { fetchCategories } from "../../services/fetchData";
 import { List } from "../List/List";
 import { Currensy } from "../Currensy/Currensy";
 
-export const NavBar = () => {
+export const NavBar = ({modal}) => {
   const { data, loading, error } = useQuery(fetchCategories);
 
   if (loading) return "Loading...";
@@ -14,13 +14,11 @@ export const NavBar = () => {
     <>
       <header className={style.NavBar}>
         <nav>
-          <List data={data} />
+          <List data={data} modal={modal} />
         </nav>
         <div className={style.Item}>
           <Currensy />
-          <button>
-           
-          </button>
+          <button></button>
         </div>
       </header>
     </>

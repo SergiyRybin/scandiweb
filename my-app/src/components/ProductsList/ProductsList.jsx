@@ -22,47 +22,52 @@ export const ProductsList = ({ modal }) => {
   const allCategory = data.categories
     .filter((el) => el.name === currentCat)
     .map((el) => el.products);
+
   const showButtonAddProduct = (e) => {
     setAddProduct(e.target.id);
   };
 
   return (
     <>
-      <h1>Category</h1>
+      <h1>Category: {currentCat}</h1>
       <ul className={style.ProductsList}>
-        {allCategory[0].map((el, index) => (
-          <li
-            key={index}
-            id={el.id}
-            onClick={() => {
-              modal(el.id, el.gallery[0]);
-            }}
-            onMouseEnter={showButtonAddProduct}
-            onMouseLeave={() => {
-              setAddProduct("");
-            }}
-          >
-            <img src={el.gallery[0]} alt={el.name} />
-            {addProduct === el.id && (
-              <button
-                className={style.AddProduct}
+        {allCategory[0].map((el, index) => {
+          if (index <= 3) {
+            return (
+              <li
+                key={index}
+                id={el.id}
                 onClick={() => {
-                  dispatch(addToStore({ store: "Add" }));
+                  modal(el.id, el.gallery[0]);
+                }}
+                onMouseEnter={showButtonAddProduct}
+                onMouseLeave={() => {
+                  setAddProduct("");
                 }}
               >
-                Add
-              </button>
-            )}
-            <div className={style.Name}>
-              <p>{el.name}</p>
-              <p>
-                {el.prices
-                  .filter((e) => e.currency.label === value.label)
-                  .map((i) => i.currency.label + " " + i.amount)}
-              </p>
-            </div>
-          </li>
-        ))}
+                <img src={el.gallery[0]} alt={el.name} />
+                {addProduct === el.id && (
+                  <button
+                    className={style.AddProduct}
+                    onClick={() => {
+                      dispatch(addToStore({ store: "Add" }));
+                    }}
+                  >
+                    Add
+                  </button>
+                )}
+                <div className={style.Name}>
+                  <p>{el.name}</p>
+                  <p>
+                    {el.prices
+                      .filter((e) => e.currency.label === value.label)
+                      .map((i) => i.currency.label + " " + i.amount)}
+                  </p>
+                </div>
+              </li>
+            );
+          }
+        })}
       </ul>
     </>
   );

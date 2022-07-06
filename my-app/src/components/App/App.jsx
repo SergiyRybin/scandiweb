@@ -19,6 +19,12 @@ export default class App extends Component {
     });
   };
 
+  modalClose = (e) => {
+    this.setState({
+      modal: e,
+    });
+  };
+
   blockScrol = () => {
     document.body.style.overflow = "hidden";
   };
@@ -28,8 +34,9 @@ export default class App extends Component {
     return (
       <>
         <Container>
-          <NavBar />
+          <NavBar modal={this.modalClose} />
           <ProductsList modal={this.modalOpen} />
+
           {modal && (
             <ModalDetails
               dataId={product}

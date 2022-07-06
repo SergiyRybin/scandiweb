@@ -59,8 +59,7 @@ export const Currensy = () => {
               currenciesValue(el, e);
             }}
           >
-            {el.symbol}
-            {el.label}
+            {el.symbol + " " + el.label}
           </li>
         ))}
       </ul>

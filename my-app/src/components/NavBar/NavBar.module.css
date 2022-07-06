@@ -1,18 +1,21 @@
 .NavBar {
-  margin: 0;
+  position: sticky;
+  top: 0;
   height: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background: white;
+  z-index: 100;
 }
 
-.Item{
+.Item {
   display: flex;
   align-items: center;
   position: relative;
 }
 
-.Item button{
+.Item button {
   background-image: url(../../image/2849824-basket-buy-market-multimedia-shop-shopping-store_107977.svg);
   height: 20px;
   width: 20px;
