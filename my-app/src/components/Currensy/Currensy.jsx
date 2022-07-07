@@ -1,9 +1,7 @@
 import { useQuery } from "@apollo/client";
-import { useRef } from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addCurrensy, currencyValue } from "../../redux/reduser";
+import { addCurrensy, currencyValue } from "../../redux/reduser/reduser";
 import { fetchCurrencies } from "../../services/fetchData";
 import style from "../Currensy/Currensy.module.css";
 

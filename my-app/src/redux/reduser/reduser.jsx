@@ -6,19 +6,21 @@ export const mySlice = createSlice({
     currensy: {
       currencies: { __typename: "Currency", label: "USD", symbol: "$" },
     },
-    store: {},
-    categore: 'all'
+    store: '',
+    categore: "all",
   },
   reducers: {
     addCurrensy(state, action) {
       state.currensy = action.payload;
     },
     addToStore(state, action) {
-      console.log(action.payload);
+      // state.store.push(action.payload)
+      // console.log(action.payload);
+     state.store={...state.store, ...action.payload}
     },
-    addCurentCategory(state, action){
-      state.categore = action.payload
-    }
+    addCurentCategory(state, action) {
+      state.categore = action.payload;
+    },
   },
 });
 
@@ -28,9 +30,8 @@ export const { addToStore } = mySlice.actions;
 
 export const { addCurentCategory } = mySlice.actions;
 
+export const currencyValue = (state) => state.myValue.currensy.currencies;
 
-export const currencyValue = state => state.myValue.currensy.currencies
+export const readProductStore = (state) => state.myValue.store;
 
-export const addProductState = state => state.myValue.store
-
-export const currencyCategore = state => state.myValue.categore
+export const currencyCategore = (state) => state.myValue.categore;

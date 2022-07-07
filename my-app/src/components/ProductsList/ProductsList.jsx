@@ -1,11 +1,9 @@
 import { useQuery } from "@apollo/client";
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { currencyValue } from "../../redux/reduser";
-import { addToStore } from "../../redux/reduser";
+import { addToStore, currencyCategore, currencyValue } from "../../redux/reduser/reduser";
 import { fetchProducts } from "../../services/fetchData";
 import style from "../ProductsList/ProductsList.module.css";
-import { currencyCategore } from "../../redux/reduser";
 
 import { useDispatch } from "react-redux";
 

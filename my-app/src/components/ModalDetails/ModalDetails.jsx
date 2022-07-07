@@ -1,14 +1,21 @@
-import { createPortal } from "react-dom";
-import { fetchProductDetails } from "../../services/fetchData";
-import style from "../ModalDetails/ModalDetails.module.css";
 import { useQuery } from "@apollo/client";
 import { useState } from "react";
+import { createPortal } from "react-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { currencyValue, readProductStore } from "../../redux/reduser/reduser";
+import { fetchProductDetails } from "../../services/fetchData";
 import { Container } from "../Container/Container";
+import style from "../ModalDetails/ModalDetails.module.css";
+import { addToStore } from "../../redux/reduser/reduser";
 
 const modalRoot = document.querySelector("#modalDetails");
 
 export const ModalDetails = ({ dataId, dataImg }) => {
   const [currentImg, setCurrentImg] = useState(dataImg);
+  const [curentValue, setCurentValue] = useState({});
+  const valueCurrensy = useSelector(currencyValue);
+  const dispatch = useDispatch();
+  const redStore = useSelector(readProductStore);
 
   const { data, loading, error } = useQuery(fetchProductDetails, {
     variables: { id: `${dataId}` },
@@ -16,10 +23,18 @@ export const ModalDetails = ({ dataId, dataImg }) => {
   if (loading) return "Loading...";
   if (error) return `Error! ${error.message}`;
 
+  const handelClick = (e) => {
+    setCurentValue(e.target.textContent)
 
-  
+    dispatch(
+      addToStore({
+        name: data.product.name,
+        [e.target.id]: e.target.textContent,
+      })
+    );
+   
+  };
   return createPortal(
-    // <div className={style.Overlay}>
     <Container>
       <div className={style.Modal}>
         <div className={style.Gallery}>
@@ -48,17 +63,27 @@ export const ModalDetails = ({ dataId, dataImg }) => {
             <div key={index}>
               <p key={el.id}>{el.id}:</p>
               <ul className={style.List}>
-                {el.items.map((el, index) => (
-                  <li className={style.Item} key={index}>
-                    {el.displayValue}
+                {el.items.map((e, index) => (
+                  <li
+                    id={el.id}
+                    className={
+                      `${curentValue === e.displayValue &&
+                        style.ItemActive}
+                         ${style.Item}`
+                    }
+                    key={index}
+                    onClick={handelClick}
+                  >
+                    {e.displayValue}
                   </li>
                 ))}
               </ul>
             </div>
           ))}
           <p>
-            {data.product.prices[0].currency.symbol}
-            {data.product.prices[0].amount}
+            {data.product.prices
+              .filter((e) => e.currency.label === valueCurrensy.label)
+              .map((i) => i.currency.label + " " + i.amount)}
           </p>
           <button>add to cart</button>
           <div
@@ -68,7 +93,7 @@ export const ModalDetails = ({ dataId, dataImg }) => {
         </div>
       </div>
     </Container>,
-    // </div>
+
     modalRoot
   );
 };
