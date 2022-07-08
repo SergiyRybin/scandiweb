@@ -1,0 +1,24 @@
+.Modal {
+  top: 0;
+  z-index: 2;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  margin-top: 80px;
+  background-color: white;
+
+  padding-bottom: 30px;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.Modal li {
+  display: flex;
+  height: 336px;
+}
+
+.Modal img {
+  height: 288px;
+}

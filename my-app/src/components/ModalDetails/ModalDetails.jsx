@@ -12,10 +12,10 @@ const modalRoot = document.querySelector("#modalDetails");
 
 export const ModalDetails = ({ dataId, dataImg }) => {
   const [currentImg, setCurrentImg] = useState(dataImg);
-  const [curentValue, setCurentValue] = useState({});
+  const [curentValue, setCurentValue] = useState();
+  const [productToStore, setProductToStore] = useState();
   const valueCurrensy = useSelector(currencyValue);
   const dispatch = useDispatch();
-  const redStore = useSelector(readProductStore);
 
   const { data, loading, error } = useQuery(fetchProductDetails, {
     variables: { id: `${dataId}` },
@@ -24,15 +24,18 @@ export const ModalDetails = ({ dataId, dataImg }) => {
   if (error) return `Error! ${error.message}`;
 
   const handelClick = (e) => {
-    setCurentValue(e.target.textContent)
+    setCurentValue(e.target.textContent);
 
-    dispatch(
-      addToStore({
-        name: data.product.name,
-        [e.target.id]: e.target.textContent,
-      })
-    );
-   
+    setProductToStore((prev) => ({
+      ...prev,
+      name: data.product.name,
+      [e.target.id]: e.target.textContent,
+      image: currentImg,
+    }));
+  };
+
+  const saveToStore = () => {
+    dispatch(addToStore(productToStore));
   };
   return createPortal(
     <Container>
@@ -66,11 +69,9 @@ export const ModalDetails = ({ dataId, dataImg }) => {
                 {el.items.map((e, index) => (
                   <li
                     id={el.id}
-                    className={
-                      `${curentValue === e.displayValue &&
-                        style.ItemActive}
-                         ${style.Item}`
-                    }
+                    className={`${
+                      curentValue === e.displayValue && style.ItemActive
+                    } ${style.Item}`}
                     key={index}
                     onClick={handelClick}
                   >
@@ -85,7 +86,7 @@ export const ModalDetails = ({ dataId, dataImg }) => {
               .filter((e) => e.currency.label === valueCurrensy.label)
               .map((i) => i.currency.label + " " + i.amount)}
           </p>
-          <button>add to cart</button>
+          <button onClick={saveToStore}>add to cart</button>
           <div
             className={style.SecondDescr}
             dangerouslySetInnerHTML={{ __html: data.product.description }}
